@@ -29,10 +29,10 @@ for target in $targets; do
   output="${release_path}/${repo_name}_${os}_${arch}"
 
   echo "----> Building project for: $target"
-  GOOS=$os GOARCH=$arch CGO_ENABLED=0 go get -u && go build -o $output
   if [ os = "windows" ]; then
     output+='.exe'
   fi
+  GOOS=$os GOARCH=$arch CGO_ENABLED=0 go get -u && go build -o $output
   zip -j $output.zip $output > /dev/null
 done
 
