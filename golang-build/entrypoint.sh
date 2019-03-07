@@ -30,8 +30,8 @@ for target in $targets; do
 
   echo "----> Building project for: $target"
   GOOS=$os GOARCH=$arch CGO_ENABLED=0 go get -u && go build -o $output
-  if [ $os = "windows" ]; then
-    $output+='.exe'
+  if [ os = "windows" ]; then
+    output+='.exe'
   fi
   zip -j $output.zip $output > /dev/null
 done
