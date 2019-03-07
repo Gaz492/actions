@@ -32,7 +32,7 @@ for target in $targets; do
   if [ os = "windows" ]; then
     output+='.exe'
   fi
-  GOOS=$os GOARCH=$arch CGO_ENABLED=0 go get -u && go build -o $output
+  GOOS=$os GOARCH=$arch CGO_ENABLED=0 go get && go build -o $output
   zip -j $output.zip $output > /dev/null
 done
 
