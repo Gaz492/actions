@@ -28,7 +28,7 @@ go get
 
 for target in $targets; do
   echo "----> Building project for: $target"
-  platform_split=(${platform//\// })
+  platform_split=(${targets//\// })
   GOOS=${platform_split[0]}
   GOARCH=${platform_split[1]}
   output_name="${release_path}/${repo_name}_${GOOS}_${GOARCH}"
