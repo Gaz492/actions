@@ -29,11 +29,13 @@ for target in $targets; do
   output="${release_path}/${repo_name}_${os}_${arch}"
 
   echo "----> Building project for: $target"
-  if [ $os = "windows" ]; then
+  GOOS=$os
+  GOARCH=$arch
+  if [ $GOOS = "windows" ]; then
     output+='.exe'
   fi
-  GOOS=$os
-  GOARCH=$arch CGO_ENABLED=0 go get && go build -o $output
+  go get
+  go build -o $output
 done
 
 echo "----> Build is complete. List of files at $release_path:"
