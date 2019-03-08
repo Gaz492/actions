@@ -35,7 +35,7 @@ for target in $targets; do
   if [ $GOOS = "windows" ]; then
     output+='.exe'
   fi
-  env GOOS=$GOOS GOARCH=$GOARCH go build -o $output_name $package
+  env GOOS=$GOOS GOARCH=$GOARCH go build -o $output_name
 #   GOOS=$os
 #   GOARCH=$arch CGO_ENABLED=0 go get && go build -i -o $output
 done
