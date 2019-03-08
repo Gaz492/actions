@@ -27,17 +27,15 @@ echo "----> Getting Go Packages"
 go get
 
 for target in $targets; do
-  echo "----> Building project for: $target"
-  platform_split=(${targets//\// })
-  GOOS=${platform_split[0]}
-  GOARCH=${platform_split[1]}
-  output_name="${release_path}/${repo_name}_${GOOS}_${GOARCH}"
-  if [ $GOOS = "windows" ]; then
+  os="$(echo $target | cut -d '/' -f1)"
+  arch="$(echo $target | cut -d '/' -f2)"
+  output="${release_path}/${repo_name}_${os}_${arch}"
+  if [ $os = "windows" ]; then
     output+='.exe'
   fi
-  env GOOS=$GOOS GOARCH=$GOARCH go build -o $output_name
-#   GOOS=$os
-#   GOARCH=$arch CGO_ENABLED=0 go get && go build -i -o $output
+
+  echo "----> Building project for: $target"
+  env GOOS=$os GOARCH=$arch go build -o $output
 done
 
 echo "----> Build is complete. List of files at $release_path:"
