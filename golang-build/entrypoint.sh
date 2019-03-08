@@ -23,20 +23,21 @@ mkdir -p $root_path
 cp -a $GITHUB_WORKSPACE/* $root_path/
 cd $root_path
 
-echo "----> Supported Build Distros"
-go tool dist list
+echo "----> Getting Go Packages"
+go get
 
 for target in $targets; do
-  os="$(echo $target | cut -d '/' -f1)"
-  arch="$(echo $target | cut -d '/' -f2)"
-  output="${release_path}/${repo_name}_${os}_${arch}"
-
   echo "----> Building project for: $target"
-  if [ $os = "windows" ]; then
+  platform_split=(${platform//\// })
+  GOOS=${platform_split[0]}
+  GOARCH=${platform_split[1]}
+  output_name="${release_path}/${repo_name}_${GOOS}_${GOARCH}"
+  if [ $GOOS = "windows" ]; then
     output+='.exe'
   fi
-  GOOS=$os
-  GOARCH=$arch CGO_ENABLED=0 go get && go build -i -o $output
+  env GOOS=$GOOS GOARCH=$GOARCH go build -o $output_name $package
+#   GOOS=$os
+#   GOARCH=$arch CGO_ENABLED=0 go get && go build -i -o $output
 done
 
 echo "----> Build is complete. List of files at $release_path:"
