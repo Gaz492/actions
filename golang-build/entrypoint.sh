@@ -33,7 +33,7 @@ for target in $targets; do
     output+='.exe'
   fi
   GOOS=$os
-  GOARCH=$arch CGO_ENABLED=0 go get && go build -o $output
+  GOARCH=$arch CGO_ENABLED=0 go get && go build -i -o $output
 done
 
 echo "----> Build is complete. List of files at $release_path:"
