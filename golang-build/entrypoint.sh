@@ -34,7 +34,6 @@ for target in $targets; do
   fi
   GOOS=$os
   GOARCH=$arch CGO_ENABLED=0 go get && go build -o $output
-  zip -j $output.zip $output > /dev/null
 done
 
 echo "----> Build is complete. List of files at $release_path:"
