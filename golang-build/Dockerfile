@@ -1,8 +1,8 @@
 FROM golang:1.11
 
 LABEL "name"="Go Builder"
-LABEL "maintainer"="Dan Sosedoff <dan.sosedoff@gmail.com>"
-LABEL "version"="0.2.0"
+LABEL "maintainer"="Gaz"
+LABEL "version"="1.0.0"
 
 LABEL "com.github.actions.name"="Go Builder"
 LABEL "com.github.actions.description"="Cross-complile Go programs"
